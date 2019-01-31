@@ -7,20 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.destroy_all
+Cat.destroy_all
+CatRentalRequest.destroy_all
 
-5.times do |i|
-    User.create!(username: "user#{i}", password: "password#{i}")
+1.upto(5) do |i|
+    u = User.create!(username: "user#{i}", 
+    password: "password#{i}")
 
-    # color = ['red','brown','black'].sample
-    # sex = ['M','F'].sample 
+    color = %w(black white orange brown).sample
+    sex = ['M','F'].sample 
     
-    # c = Cat.create!(name: "name#{i}", 
-    #     birth_date: i.years.ago, 
-    #     color: color,
-    #     sex: sex, 
-    #     description: "description#{i}")
+    c = Cat.create!(name: "name#{i}", 
+        birth_date: i.years.ago, 
+        color: color,
+        sex: sex, 
+        description: "description#{i}",
+        user_id: u.id)
 
-    # CatRentalRequest.create!(cat_id: c.id,
-    # start_date: i.month.ago,
-    # end_date: i.month.from_now)
+    CatRentalRequest.create!(cat_id: c.id,
+    start_date: i.month.ago,
+    end_date: i.month.from_now,
+    status: 'PENDING')
 end

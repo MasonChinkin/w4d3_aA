@@ -17,6 +17,13 @@ class User < ApplicationRecord
     validates :session_token, uniqueness: true
     
     before_validation :ensure_session_token
+    
+    has_many :cats,
+        primary_key: :id, 
+        foreign_key: :user_id,
+        class_name: :Cat 
+
+    
 
     attr_reader :password 
 
